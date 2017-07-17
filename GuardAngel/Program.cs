@@ -6,13 +6,26 @@ using System.ServiceProcess;
 using System.Text;
 using System.Configuration;
 using System.Timers;
+using System.Runtime.InteropServices;
 
 namespace GuardAngel
 {
     class Program
     {
+        [DllImport("user32.dll", EntryPoint = "ShowWindow", SetLastError = true)]
+        static extern bool ShowWindow(IntPtr hWnd, uint nCmdShow);
+        [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
         static void Main(string[] args)
         {
+            Console.Title = "GuardAngel";
+            IntPtr intptr = FindWindow("ConsoleWindowClass", "GuardAngel");
+            if (intptr != IntPtr.Zero)
+            {
+                //隐藏这个窗口
+                ShowWindow(intptr, 0);
+            }
+
             var allServices = ServiceController.GetServices();
             var needGuardServices = GetNeedGuardService();
             int checkRate = 0;
@@ -77,7 +90,7 @@ namespace GuardAngel
             ServiceInfo[] needGuardServices = JsonConvert.DeserializeObject<ServiceInfo[]>(result);
 
             return needGuardServices;
-        } 
+        }
     }
 
     public class ServiceInfo
