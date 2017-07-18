@@ -1,0 +1,10 @@
+E:\GuardAngel\GuardAngelWin\bin\Debug\GuardAngelWin.exe
+E:\GuardAngel\GuardAngelWin\bin\Debug\GuardAngelWin.pdb
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.Form1.resources
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.Properties.Resources.resources
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.csproj.GenerateResource.Cache
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.exe
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.pdb
+E:\GuardAngel\GuardAngelWin\obj\Debug\GuardAngelWin.csprojResolveAssemblyReference.cache
+E:\GuardAngel\GuardAngelWin\bin\Debug\Newtonsoft.Json.dll
+E:\GuardAngel\GuardAngelWin\bin\Debug\Newtonsoft.Json.xml

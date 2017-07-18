@@ -1,0 +1,9 @@
+E:\GuardAngel\GuardAngelWin\bin\Release\GuardAngelWin.exe
+E:\GuardAngel\GuardAngelWin\bin\Release\GuardAngelWin.pdb
+E:\GuardAngel\GuardAngelWin\obj\Release\GuardAngelWin.Properties.Resources.resources
+E:\GuardAngel\GuardAngelWin\obj\Release\GuardAngelWin.csproj.GenerateResource.Cache
+E:\GuardAngel\GuardAngelWin\obj\Release\GuardAngelWin.exe
+E:\GuardAngel\GuardAngelWin\obj\Release\GuardAngelWin.pdb
+E:\GuardAngel\GuardAngelWin\obj\Release\GuardAngelWin.Form1.resources
+E:\GuardAngel\GuardAngelWin\bin\Release\Newtonsoft.Json.dll
+E:\GuardAngel\GuardAngelWin\bin\Release\Newtonsoft.Json.xml
