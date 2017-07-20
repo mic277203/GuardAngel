@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using NLog;
 using System.Management;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace GuardAngel
 {
@@ -22,6 +23,20 @@ namespace GuardAngel
         private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
+            Process runProcess = RunningInstance();
+
+            if (runProcess != null)
+            {
+                try
+                {
+                    runProcess.Kill();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("杀死运行的守护程序失败", ex);
+                }
+            }
+
             Console.Title = "GuardAngel";
             IntPtr intptr = FindWindow("ConsoleWindowClass", "GuardAngel");
             if (intptr != IntPtr.Zero)
@@ -30,9 +45,8 @@ namespace GuardAngel
                 ShowWindow(intptr, 0);
             }
 
-            var allServices = ServiceController.GetServices();
-            var needGuardServices = GetNeedGuardService();
             int checkRate = 0;
+            var needGuardServices = GetNeedGuardService();
 
             try
             {
@@ -49,6 +63,7 @@ namespace GuardAngel
             time.Elapsed += (sender, e) =>
             {
                 time.Stop();
+                var allServices = ServiceController.GetServices();
 
                 foreach (var service in allServices)
                 {
@@ -186,6 +201,33 @@ namespace GuardAngel
             ServiceInfo[] needGuardServices = JsonConvert.DeserializeObject<ServiceInfo[]>(result);
 
             return needGuardServices;
+        }
+
+
+        static Process RunningInstance()
+        {
+            Process current = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcessesByName(current.ProcessName);
+
+            //Loop through the running processes in with the same name 
+            foreach (Process process in processes)
+            {
+                //Ignore the current process 
+                if (process.Id != current.Id)
+                {
+                    //Make sure that the process is running from the exe file. 
+                    if (Assembly.GetExecutingAssembly().Location.
+                         Replace("/", "\\") == current.MainModule.FileName)
+
+                    {
+                        //Return the other process instance.  
+                        return process;
+
+                    }
+                }
+            }
+            //No other instance was found, return null.  
+            return null;
         }
     }
 
